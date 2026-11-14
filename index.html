@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A frontend-only social media clone demo." />
+  <title>Gather — Social Feed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" id="homeLink" aria-label="Gather home"><span class="brand-mark">g</span><span>gather</span></a>
+      <div class="sidebar-label">MENU</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="feed"><span class="nav-icon">⌂</span> Home <span class="nav-dot"></span></button>
+        <button class="nav-item" data-view="explore"><span class="nav-icon">⌕</span> Explore</button>
+        <button class="nav-item" data-view="saved"><span class="nav-icon">♡</span> Saved posts</button>
+        <button class="nav-item" data-view="messages"><span class="nav-icon">✉</span> Messages <span class="unread">3</span></button>
+      </nav>
+      <div class="sidebar-label communities-label">YOUR CIRCLES <button id="addCircle" class="tiny-plus" aria-label="Add circle">+</button></div>
+      <div class="circle-list">
+        <button class="circle-link" data-circle="Design folks"><span class="circle-avatar coral">✿</span> Design folks <span class="circle-count">12</span></button>
+        <button class="circle-link" data-circle="Indie makers"><span class="circle-avatar lilac">⌘</span> Indie makers <span class="circle-count">8</span></button>
+        <button class="circle-link" data-circle="Slow living"><span class="circle-avatar mint">☼</span> Slow living <span class="circle-count">24</span></button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="upgrade-card"><div class="sparkle">✦</div><strong>Your people are here.</strong><p>Make space for more good conversations.</p><button id="inviteBtn">Invite a friend <span>↗</span></button></div>
+        <button class="profile-mini" id="profileBtn"><img src="https://i.pravatar.cc/80?img=47" alt="Your profile"><span><strong>Alex Morgan</strong><small>@alexmorgan</small></span><span class="more">···</span></button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">g</span> gather</div>
+        <div class="breadcrumb"><span>Community</span><span class="crumb-slash">/</span><strong id="pageTitle">Your feed</strong></div>
+        <div class="top-actions"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search people or posts..." aria-label="Search people or posts"><kbd>⌘ K</kbd></label><button class="icon-button notification-btn" id="notificationsBtn" aria-label="Notifications">♧<i></i></button><button class="compose-btn" id="jumpComposer"><span>＋</span> Create post</button></div>
+      </header>
+      <div class="content-grid">
+        <section class="feed-column">
+          <div class="welcome-row"><div><div class="eyebrow">TUESDAY, OCTOBER 28</div><h1>Good morning, Alex <span>✦</span></h1><p>Here's what's happening in your community today.</p></div><div class="weather-pill">☀ <span>Make it a good one</span></div></div>
+          <div class="stories-section"><div class="section-heading"><h2>Your circles</h2><button class="text-link" id="allStories">See all <span>→</span></button></div><div class="stories" id="stories">
+            <button class="story add-story" id="addStory"><span class="story-ring add-ring"><span>＋</span></span><span>Your story</span></button>
+            <button class="story" data-story="Maya Chen"><span class="story-ring"><img src="https://i.pravatar.cc/100?img=12" alt=""></span><span>Maya Chen</span></button>
+            <button class="story" data-story="Jordan Lee"><span class="story-ring"><img src="https://i.pravatar.cc/100?img=32" alt=""></span><span>Jordan Lee</span></button>
+            <button class="story" data-story="Priya Shah"><span class="story-ring"><img src="https://i.pravatar.cc/100?img=5" alt=""></span><span>Priya Shah</span></button>
+            <button class="story" data-story="Sam Rivera"><span class="story-ring"><img src="https://i.pravatar.cc/100?img=60" alt=""></span><span>Sam Rivera</span></button>
+            <button class="story" data-story="Noah Kim"><span class="story-ring"><img src="https://i.pravatar.cc/100?img=44" alt=""></span><span>Noah Kim</span></button>
+          </div></div>
+          <section class="composer card" id="composer"><div class="composer-top"><img src="https://i.pravatar.cc/80?img=47" alt="Alex Morgan"><button id="composerInput" class="composer-placeholder">What's on your mind, Alex?</button></div><div class="composer-tools"><div class="composer-options"><button id="photoOption"><span class="tool-green">▧</span> Photo</button><button id="moodOption"><span class="tool-yellow">☻</span> Feeling</button><button id="circleOption"><span class="tool-purple">◉</span> Circle</button></div><button class="post-btn" id="postBtn" disabled>Post <span>→</span></button></div><div class="composer-editor" id="composerEditor" hidden><textarea id="postText" rows="3" placeholder="Share something with your community..."></textarea><div class="editor-footer"><span id="charCount">0 / 500</span><span id="editorHint">Be kind. Be curious.</span></div></div><input type="file" id="imageUpload" accept="image/*" hidden></section>
+          <div class="feed-heading"><h2><span id="feedHeading">Your feed</span> <span class="feed-count" id="postCount">6</span></h2><div class="feed-filters"><button class="filter-btn selected" data-filter="Latest">Latest <span>⌄</span></button><button class="filter-btn" data-filter="Following">Following</button></div></div>
+          <div id="postList" class="post-list"></div>
+          <div class="load-more"><span></span><p>You're all caught up.</p><span></span></div>
+        </section>
+        <aside class="right-column">
+          <section class="right-card trends-card"><div class="right-card-heading"><h3>Trending today</h3><button id="trendingOptions" aria-label="More trending options">···</button></div><div class="trend-item"><div><span class="trend-category">DESIGN · 2.4K POSTS</span><strong>#DailyUI</strong><p>Small ideas, big inspiration</p></div><span class="trend-art trend-art-one">✳</span></div><div class="trend-item"><div><span class="trend-category">LIFESTYLE · 1.8K POSTS</span><strong>#LittleJoy</strong><p>Celebrate the little things</p></div><span class="trend-art trend-art-two">☼</span></div><div class="trend-item"><div><span class="trend-category">CREATORS · 986 POSTS</span><strong>#BuildInPublic</strong><p>Progress over perfection</p></div><span class="trend-art trend-art-three">↗</span></div><button class="see-trends" id="exploreTrends">Explore all trends <span>→</span></button></section>
+          <section class="right-card suggested-card"><div class="right-card-heading"><h3>People to know</h3><button class="text-link" id="seePeople">See all</button></div><div class="suggested-person"><img src="https://i.pravatar.cc/80?img=25" alt="Mia Parker"><div class="person-info"><strong>Mia Parker <span class="verified">✓</span></strong><small>Illustrator · 3 mutuals</small></div><button class="follow-btn">Follow</button></div><div class="suggested-person"><img src="https://i.pravatar.cc/80?img=11" alt="Ethan Brooks"><div class="person-info"><strong>Ethan Brooks</strong><small>Product designer</small></div><button class="follow-btn">Follow</button></div><div class="suggested-person"><img src="https://i.pravatar.cc/80?img=48" alt="Lena Ortiz"><div class="person-info"><strong>Lena Ortiz <span class="verified">✓</span></strong><small>Writer · 5 mutuals</small></div><button class="follow-btn">Follow</button></div></section>
+          <footer class="site-footer"><div><a href="README.md">About</a><a href="LICENSE">Guidelines</a><a href="#" id="privacyLink">Privacy</a></div><div>© 2026 Gather Social</div><p>Made for the moments that matter. <span>✦</span></p></footer>
+        </aside>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div class="modal-icon">✦</div><h2 id="modalTitle">A little note</h2><p id="modalText"></p><button class="modal-action" id="modalAction">Sounds good</button></div></div>
+  <script src="script.js"></script>
+</body>
+</html>
